@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Velvet List — Curated Amazon Finds</title>
+  <meta name="description" content="The Velvet List is a curated collection of top Amazon finds — handpicked for quality, style, and value." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --plum:       #3b1a47;
+      --plum-deep:  #271030;
+      --plum-light: #5c2d72;
+      --gold:       #c9a96e;
+      --gold-light: #e0c99a;
+      --cream:      #faf6f0;
+      --cream-dark: #f0e9df;
+      --text:       #2c2230;
+      --text-mid:   #5a4e62;
+      --text-light: #8a7d94;
+      --white:      #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: rgba(39, 16, 48, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background:
+        linear-gradient(160deg, var(--plum-deep) 0%, var(--plum) 55%, var(--plum-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,169,110,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* subtle texture overlay */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 60px,
+          rgba(255,255,255,0.015) 60px,
+          rgba(255,255,255,0.015) 61px
+        );
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      padding: 6px 18px;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 100px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.72);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.75;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--gold);
+      color: var(--plum-deep);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .hero-cta:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(201,169,110,0.6), transparent);
+      animation: scrollpulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollpulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* ── ABOUT ───────────────────────────────────────── */
+    #about {
+      padding: 112px 24px;
+      background: var(--cream);
+    }
+
+    .section-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--plum-deep);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--plum-light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 64px;
+    }
+
+    .about-left .section-title { margin-bottom: 20px; }
+
+    .about-left p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .about-left p:last-child { margin-bottom: 0; }
+
+    .about-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .pillar {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .pillar-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--plum), var(--plum-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 1.1rem;
+      margin-top: 2px;
+    }
+
+    .pillar-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--plum-deep);
+      margin-bottom: 6px;
+    }
+
+    .pillar-text p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* divider */
+    .divider {
+      width: 64px;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── PRIVACY ─────────────────────────────────────── */
+    #privacy {
+      padding: 96px 24px;
+      background: var(--plum-deep);
+      color: rgba(255,255,255,0.72);
+    }
+
+    #privacy .section-title {
+      color: var(--white);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    #privacy .section-label { margin-bottom: 12px; }
+
+    .privacy-intro {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 48px;
+      max-width: 680px;
+    }
+
+    .privacy-blocks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    .privacy-block {
+      border-top: 1px solid rgba(201,169,110,0.25);
+      padding-top: 28px;
+    }
+
+    .privacy-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    .privacy-block p, .privacy-block li {
+      font-size: 0.87rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .privacy-block ul {
+      padding-left: 18px;
+      margin-top: 8px;
+    }
+
+    .privacy-block li { margin-bottom: 6px; }
+
+    .privacy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 48px;
+      padding: 10px 20px;
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+    }
+
+    .privacy-badge span { color: var(--gold); font-size: 0.9rem; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: #1a0c24;
+      padding: 36px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(201,169,110,0.12);
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    footer a {
+      color: rgba(201,169,110,0.6);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 720px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 52px; }
+      .privacy-blocks { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <nav>
+    <a class="nav-logo" href="#">The Velvet List</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#privacy">Disclosures</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Curated Amazon Finds</div>
+      <h1 class="hero-title">
+        The things worth having,<br>
+        <em>finally in one place.</em>
+      </h1>
+      <p class="hero-sub">
+        The Velvet List is a carefully curated collection of the best Amazon has to offer —
+        handpicked for quality, style, and genuine value. No noise. Just the good stuff.
+      </p>
+      <a href="#about" class="hero-cta">Explore the List</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ── ABOUT ───────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-left">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">Built for people who want <em>less searching,</em> more finding.</h2>
+          <p>
+            Amazon has millions of products. Most of them aren't worth your time.
+            The Velvet List exists because finding genuinely great things shouldn't require hours
+            of scrolling through sponsored noise and five-star reviews that mean nothing.
+          </p>
+          <p>
+            Every product we feature is chosen for a reason — a clear benefit, a standout quality,
+            something that earns its place on the list. We track trending searches, commission
+            tiers, and real customer sentiment so you don't have to.
+          </p>
+          <p>
+            Think of us as the friend who always seems to know exactly what to buy —
+            and is happy to share.
+          </p>
+        </div>
+
+        <div class="about-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">&#10003;</div>
+            <div class="pillar-text">
+              <h3>Ruthlessly Curated</h3>
+              <p>Every item earns its place. We filter for quality, ratings, and real-world value before anything makes the list.</p>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-icon">&#9670;</div>
+            <div class="pillar-text">
+              <h3>Trend-Aware</h3>
+              <p>We track what's resonating right now — on Pinterest, on Amazon, and in the categories that actually matter.</p>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-icon">&#9733;</div>
+            <div class="pillar-text">
+              <h3>Always Fresh</h3>
+              <p>The list updates weekly. Out with the stale picks, in with what's genuinely worth buying this season.</p>
+            </div>
+          </div>
+
+          <div class="pillar">
+            <div class="pillar-icon">&#9752;</div>
+            <div class="pillar-text">
+              <h3>Honest by Default</h3>
+              <p>Every affiliate link is disclosed. We earn a small commission when you shop — at zero extra cost to you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRIVACY & DISCLOSURES ───────────────────────── -->
+  <section id="privacy">
+    <div class="section-inner">
+      <div class="section-label">Legal &amp; Disclosures</div>
+      <h2 class="section-title">Privacy Policy &amp; Affiliate Disclosures</h2>
+      <p class="privacy-intro">
+        Last updated: April 2026. The Velvet List is committed to full transparency.
+        The following disclosures explain how we earn money, how we handle your data,
+        and what your rights are.
+      </p>
+
+      <div class="privacy-blocks">
+
+        <div class="privacy-block">
+          <h3>Amazon Affiliate Disclosure</h3>
+          <p>
+            The Velvet List is a participant in the Amazon Services LLC Associates Program,
+            an affiliate advertising program designed to provide a means for sites to earn
+            advertising fees by advertising and linking to Amazon.com.
+          </p>
+          <p style="margin-top:10px;">
+            When you click a product link and make a purchase on Amazon, we may earn a
+            small commission at no additional cost to you. Prices and availability are
+            subject to change at any time.
+          </p>
+        </div>
+
+        <div class="privacy-block">
+          <h3>Advertising &amp; #Ad Compliance (FTC)</h3>
+          <p>
+            In accordance with the Federal Trade Commission's guidelines on endorsements
+            and testimonials (16 CFR Part 255), all sponsored content and affiliate
+            promotions published by The Velvet List — including Pinterest pins — are
+            clearly marked with <strong style="color:var(--gold-light);">#ad</strong> or
+            <strong style="color:var(--gold-light);">Ad:</strong>.
+          </p>
+          <p style="margin-top:10px;">
+            We only recommend products we believe provide genuine value. Affiliate
+            relationships do not influence our editorial selection.
+          </p>
+        </div>
+
+        <div class="privacy-block">
+          <h3>Information We Collect</h3>
+          <p>This website does not collect personal information directly. If you navigate to Amazon or Pinterest via our links, those platforms' privacy policies govern any data collected. We may use basic analytics (e.g. page view counts) to understand site traffic. No personal identifiers are stored.</p>
+        </div>
+
+        <div class="privacy-block">
+          <h3>Cookies &amp; Tracking</h3>
+          <p>
+            This site does not set first-party cookies. Amazon and Pinterest, linked from
+            this site, may set their own cookies in accordance with their respective
+            privacy policies. You can manage cookie preferences through your browser settings.
+          </p>
+        </div>
+
+        <div class="privacy-block">
+          <h3>External Links</h3>
+          <p>
+            All product links on The Velvet List direct to Amazon.com. We are not
+            responsible for the content, accuracy, or privacy practices of external sites.
+            Visiting Amazon or Pinterest is subject to their terms of service.
+          </p>
+        </div>
+
+        <div class="privacy-block">
+          <h3>Contact</h3>
+          <p>
+            Questions about these disclosures or our affiliate practices? Reach us at:
+          </p>
+          <ul>
+            <li>Email: <a href="mailto:hello@thevelvetlist.com" style="color:rgba(201,169,110,0.7);">hello@thevelvetlist.com</a></li>
+            <li>Pinterest: @TheVelvetList</li>
+          </ul>
+          <p style="margin-top:10px;">
+            We aim to respond within 3 business days.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="privacy-badge">
+        <span>&#9654;</span>
+        FTC-compliant &nbsp;&middot;&nbsp; Amazon Associates participant &nbsp;&middot;&nbsp; #ad disclosed on every pin
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────── -->
+  <footer>
+    <div class="footer-logo">The Velvet List</div>
+    <p>
+      &copy; 2026 The Velvet List. All rights reserved.<br>
+      <a href="#privacy">Affiliate Disclosure</a> &nbsp;&middot;&nbsp;
+      <a href="#privacy">Privacy Policy</a><br><br>
+      The Velvet List is a participant in the Amazon Services LLC Associates Program.
+      Amazon, the Amazon logo, and Amazon.com are trademarks of Amazon.com, Inc.
+    </p>
+  </footer>
+
+</body>
+</html>
